@@ -177,10 +177,20 @@ restoreOverwrittenFilesWithOriginals().then(() => {
   app.use((req, res, next) => {
   res.setHeader(
     "Content-Security-Policy",
-    "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self';"
+    "default-src 'self'; " +
+    "script-src 'self'; " +
+    "style-src 'self' 'unsafe-inline'; " +
+    "img-src 'self' data:; " +
+    "font-src 'self'; " +
+    "connect-src 'self'; " +
+    "object-src 'none'; " +
+    "frame-src 'self'; " +
+    "worker-src 'self'; " +
+    "media-src 'self'; " +
+    "form-action 'self';"
   )
   next()
-  })
+})
 
 
   /* Compression for all requests */
