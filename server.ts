@@ -174,6 +174,15 @@ restoreOverwrittenFilesWithOriginals().then(() => {
   app.locals.abused_ssti_bug = false
   app.locals.abused_ssrf_bug = false
 
+  app.use((req, res, next) => {
+  res.setHeader(
+    "Content-Security-Policy",
+    "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self';"
+  )
+  next()
+  })
+
+
   /* Compression for all requests */
   app.use(compression())
 
